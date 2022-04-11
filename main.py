@@ -13,10 +13,10 @@ def main():
     separator = ', '
 
     #print("Loaded Users: " + separator.join(users))
-
+    
     def userLoop():
         
-        option = input("Type A to add a user or R to remove a user: ")
+        option = input("\n\n\nType A to add a user, R to remove a user or Q to return: ")
 
         def userAdd():
             users = pickle.load(open("users.dat", "rb"))
@@ -49,8 +49,15 @@ def main():
             userAdd()
         elif option == "R" or option == "r":
             userRemove()
+        elif option == "Q" or option == "q":
+            return taskManage()
 
         return userLoop()
+    
+    def taskManage():
+        task1 = input("\n\n\nType X to add or remove a new user\nType S to access book information\nType D to access the book log: ")
+        if task1 == "X" or task1 == "x":
+            userLoop()
 
     print('\n\nWelcome to the XS\'D Library System Version(0.01) :)')
     print("Created By: Braden Foor\n")
@@ -58,5 +65,5 @@ def main():
     users = pickle.load(open("users.dat", "rb"))
     print("Loaded Users: " + separator.join(users))
 
-    userLoop()
+    taskManage()
 main()
