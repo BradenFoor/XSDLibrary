@@ -4,8 +4,8 @@ import pickle
 lu = "4/7/2022"
 
 #If this is the first time running do not tag below
-#users = ['Default']
-#pickle.dump(users, open("users.dat", "wb"))
+users = ['Default']
+pickle.dump(users, open("users.dat", "wb"))
 
 def main():
 
@@ -15,13 +15,15 @@ def main():
     #print("Loaded Users: " + separator.join(users))
 
     def userLoop():
+        
+        option = input("Type A to add a user or R to remove a user: ")
 
         def userAdd():
             users = pickle.load(open("users.dat", "rb"))
 
-            getuser = input("Enter a users name to add one: ")
+            getuser = input("Enter a usersname to add one: ")
 
-            users.append(getuser)
+            users.append(getuser.lower())
 
             pickle.dump(users, open("users.dat", "wb"))
 
@@ -29,8 +31,24 @@ def main():
 
             print("Loaded Users: " + separator.join(users))
 
-        userAdd()
+        def userRemove():
+            users = pickle.load(open("users.dat", "rb"))
+            
+            removeuser = input("Enter a username to remove one: ")
+            
+            userIndex = users.index(removeuser.lower())
+            users.pop(userIndex)
 
+            pickle.dump(users, open("users.dat", "wb"))
+
+            users = pickle.load(open("users.dat", "rb"))
+
+            print("Loaded Users: " + separator.join(users))
+            
+        if option == "A" or option == "a":
+            userAdd()
+        elif option == "R" or option == "r":
+            userRemove()
 
         return userLoop()
 
