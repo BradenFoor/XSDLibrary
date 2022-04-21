@@ -3,9 +3,20 @@ import pickle
 #lu stands for Last Updated ;)
 lu = "4/7/2022"
 
+
+
+users = ['default']
+
+booksAvailable = ['default']
+booksNotAvailable = ['default']
+
+assigned = ['default']
+
 #If this is the first time running do not tag below
-users = ['Default']
 pickle.dump(users, open("users.dat", "wb"))
+pickle.dump(booksAvailable, open("users.dat", "wb"))
+pickle.dump(booksNotAvailable, open("users.dat", "wb"))
+pickle.dump(assigned, open("users.dat", "wb"))
 
 def main():
 
@@ -14,9 +25,14 @@ def main():
 
     #print("Loaded Users: " + separator.join(users))
     
+    def searchLoop():
+        searchOption = input("\n\nType F to find a book, A to assign a book to a user, U to unassign a book from a user or Q to return: ")
+        if searchOption == "Q" or searchOption == "q":
+            return taskManage()
+            
     def userLoop():
         
-        option = input("\n\n\nType A to add a user, R to remove a user or Q to return: ")
+        option = input("\n\nType A to add a user, R to remove a user or Q to return: ")
 
         def userAdd():
             users = pickle.load(open("users.dat", "rb"))
@@ -55,9 +71,11 @@ def main():
         return userLoop()
     
     def taskManage():
-        task1 = input("\n\n\nType X to add or remove a new user\nType S to access book information\nType D to access the book log: ")
-        if task1 == "X" or task1 == "x":
+        task = input("\n\n\nType X to add or remove a new user\nType S to access book information\nType D to access the book log\n")
+        if task == "X" or task == "x":
             userLoop()
+        elif task == "S" or task == "s":
+            searchLoop()
 
     print('\n\nWelcome to the XS\'D Library System Version(0.01) :)')
     print("Created By: Braden Foor\n")
