@@ -6,10 +6,8 @@ lu = "4/7/2022"
 
 
 users = ['default']
-
 booksAvailable = ['default']
 booksNotAvailable = ['default']
-
 assigned = ['default']
 
 #If this is the first time running do not tag below
@@ -28,6 +26,11 @@ def main():
     def searchLoop():
         searchOption = input("\n\nType F to find a book, A to assign a book to a user, U to unassign a book from a user or Q to return: ")
         if searchOption == "Q" or searchOption == "q":
+            return taskManage()
+    
+    def logLoop():
+        logOption = input("\n\nType A to add a book, or R to remove a book or Q to return: ")
+        if logOption == "Q" or logOption == "q":
             return taskManage()
             
     def userLoop():
@@ -76,6 +79,8 @@ def main():
             userLoop()
         elif task == "S" or task == "s":
             searchLoop()
+        elif task == "D" or task == "d":
+            logLoop()
 
     print('\n\nWelcome to the XS\'D Library System Version(0.01) :)')
     print("Created By: Braden Foor\n")
