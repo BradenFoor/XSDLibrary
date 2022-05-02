@@ -1,7 +1,7 @@
 import pickle
 
 #lu stands for Last Updated ;)
-lu = "4/7/2022"
+lu = "5/2/2022"
 
 
 
@@ -12,9 +12,9 @@ assigned = ['default']
 
 #If this is the first time running do not tag below
 pickle.dump(users, open("users.txt", "wb"))
-pickle.dump(booksAvailable, open("users.txt", "wb"))
-pickle.dump(booksNotAvailable, open("users.txt", "wb"))
-pickle.dump(assigned, open("users.txt", "wb"))
+pickle.dump(booksAvailable, open("booksAvailable.txt", "wb"))
+pickle.dump(booksNotAvailable, open("booksNotAvailable.txt", "wb"))
+pickle.dump(assigned, open("assigned.txt", "wb"))
 
 def main():
 
@@ -30,8 +30,42 @@ def main():
     
     def logLoop():
         logOption = input("\n\nType A to add a book, or R to remove a book or Q to return: ")
+        
+        def bookAdd():
+            books = pickle.load(open("booksAvailable.txt", "rb"))
+
+            getbook = input("Enter a bookname to add one: ")
+
+            books.append(getbook.lower())
+
+            pickle.dump(books, open("booksAvailable.txt", "wb"))
+
+            books = pickle.load(open("booksAvailable.txt", "rb"))
+
+            print("Loaded Books: " + separator.join(books))
+
+        def bookRemove():
+            rbooks = pickle.load(open("booksAvailable.txt", "rb"))
+            
+            removebook = input("Enter a book to remove one: ")
+            
+            bookIndex = rbooks.index(removebook.lower())
+            rbooks.pop(bookIndex)
+
+            pickle.dump(rbooks, open("booksAvailable.txt", "wb"))
+
+            rbooks = pickle.load(open("booksAvailable.txt", "rb"))
+
+            print("Loaded Books: " + separator.join(rbooks))
+            
         if logOption == "Q" or logOption == "q":
             return taskManage()
+        elif logOption == "A" or logOption == "a":
+            bookAdd()
+        elif logOption == "R" or logOption == "r":
+            bookRemove()
+            
+        return logLoop()
             
     def userLoop():
         
