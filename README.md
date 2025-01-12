@@ -1,5 +1,5 @@
 # XSDLibrary
-A open source library tool being built by Braden Foor!
+A open source library Tool.
 This is currently unfinished and will undergo many changes between now and its official release!
 Some of the changes I would like to create are:
 
